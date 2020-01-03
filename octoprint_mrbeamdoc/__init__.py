@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+import octoprint.plugin
 
 
 from __version import __version__
 
 
-class MrBeamDocPlugin(object):
-
-    def __init__(self):
-        pass
-
-    def initialize(self):
-        pass
+class MrBeamDocPlugin(octoprint.plugin.AssetPlugin):
+    pass
 
 
 __plugin_name__ = "MrBeamDoc"
