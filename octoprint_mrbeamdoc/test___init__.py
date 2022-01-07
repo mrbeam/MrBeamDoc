@@ -17,6 +17,37 @@ class Test(TestCase):
         mrbeamdoc = get_doc_path(MrBeamDocType.USER_MANUAL, MrBeamModel.MRBEAM2_DC_R1, SupportedLanguage.FRENCH)
         self.assertEquals('UserManual_mrbeam2_fr.pdf', mrbeamdoc.get_file_name_with_extension())
 
+    def test_none_extension(self):
+        self.assertRaises(MrBeamDocNotFoundException,
+                          get_doc_path,
+                          MrBeamDocType.USER_MANUAL,
+                          MrBeamModel.MRBEAM2_DC_R1,
+                          SupportedLanguage.FRENCH,
+                          extension=None)
+
+    def test_empty_extension(self):
+        self.assertRaises(MrBeamDocNotFoundException,
+                          get_doc_path,
+                          MrBeamDocType.USER_MANUAL,
+                          MrBeamModel.MRBEAM2_DC_R1,
+                          SupportedLanguage.FRENCH,
+                          extension='')
+
+    def test_blank_extension(self):
+        self.assertRaises(MrBeamDocNotFoundException,
+                          get_doc_path,
+                          MrBeamDocType.USER_MANUAL,
+                          MrBeamModel.MRBEAM2_DC_R1,
+                          SupportedLanguage.FRENCH,
+                          extension=' ')
+
+    def test_when_not_pdf_then_raise_exception(self):
+        self.assertRaises(MrBeamDocNotFoundException, get_doc_path,
+                          MrBeamDocType.QUICKSTART_GUIDE,
+                          MrBeamModel.DREAMCUT,
+                          SupportedLanguage.ENGLISH,
+                          'gif')
+
     def test_when_doc_available_and_language_not_available_then_raise_exception(self):
         self.assertRaises(MrBeamDocNotFoundException, get_doc_path,
                           MrBeamDocType.QUICKSTART_GUIDE,

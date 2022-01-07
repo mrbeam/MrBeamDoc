@@ -17,17 +17,18 @@ class MrBeamDocNotFoundException(Exception):
                 'mrbeamdoc_type': mrbeamdoc_type, 'mrbeam_model': mrbeam_model, 'language': language})
 
 
-def get_doc_path(mrbeamdoc_type, mrbeam_model, language):
+def get_doc_path(mrbeamdoc_type, mrbeam_model, language, extension='pdf'):
     """
     mrbeamdoc_type MrBeamDocType: Enum containing all the types of documents we are owning as Strings
     mrbeam_model MrBeamModel: Enum containing all the existing mrbeam models as Strings
     language String: language in 2 character format. e.g. 'de', 'en', ...
+    extension String: file format. e.g. 'pdf', ...
 
     Return MrBeamDoc containing the needed paths to the requested file
     raises MrBeamDocNotFoundException if the parameters are invalid or don't match any existing file
     """
 
-    mrbeamdoc = MrBeamDocAvailable.get_mrbeamdoc_for(mrbeamdoc_type, mrbeam_model, language)
+    mrbeamdoc = MrBeamDocAvailable.get_mrbeamdoc_for(mrbeamdoc_type, mrbeam_model, language, extension)
     if mrbeamdoc == None:
         raise MrBeamDocNotFoundException(mrbeamdoc_type, mrbeam_model, language)
 
@@ -162,14 +163,15 @@ class MrBeamDocAvailable:
         pass
 
     @staticmethod
-    def get_mrbeamdoc_for(mrbeamdoc_type, mrbeam_model, language):
-        if mrbeamdoc_type is None or mrbeam_model is None or language is None:
+    def get_mrbeamdoc_for(mrbeamdoc_type, mrbeam_model, language, extension='pdf'):
+        if mrbeamdoc_type is None or mrbeam_model is None or language is None or extension != 'pdf':
             return None
 
         definitions_available = MrBeamDocAvailable.get_definitions_available_with_cache()
 
-        return next((MrBeamDoc(definition, language) for definition, definition_name in definitions_available if
-                     definition.is_valid(mrbeamdoc_type, mrbeam_model, language)), None)
+        return next(
+            (MrBeamDoc(definition, language, extension=extension) for definition, definition_name in
+             definitions_available if definition.is_valid(mrbeamdoc_type, mrbeam_model, language)), None)
 
     @staticmethod
     def get_mrbeam_definitions_for(mrbeam_model):
