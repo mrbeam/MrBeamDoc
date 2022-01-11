@@ -1,5 +1,7 @@
 from unittest import TestCase
 
+from mock import patch
+
 from octoprint_mrbeamdoc import get_doc_path, MrBeamDocAvailable, SupportedLanguage, MrBeamDocNotFoundException, \
     MrBeamModel, MrBeamDocType
 
@@ -100,3 +102,13 @@ class Test(TestCase):
         definitions = MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.MRBEAM2)
         for definition in definitions:
             self.assertEquals(MrBeamModel.MRBEAM2, definition.mrbeam_model)
+
+    @patch('octoprint_mrbeamdoc.MrBeamDocAvailable.get_definitions_available')
+    def test_cache_is_used_definitions_per_model(self, get_definitions_available_mock):
+        MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.MRBEAM2)
+        MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.MRBEAM2_DC_R1)
+        MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.MRBEAM2_DC_R2)
+        MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.DREAMCUT)
+        MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.DREAMCUT_S)
+        definitions = MrBeamDocAvailable.get_mrbeam_definitions_for(MrBeamModel.MRBEAM2)
+        self.assertEquals(get_definitions_available_mock.call_count, 1)
