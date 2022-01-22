@@ -104,3 +104,27 @@ class MrBeamDocUtils:
     def get_definitions_available():
         return [[getattr(MrBeamDocUtils, attr), attr] for attr in dir(MrBeamDocUtils) if
                 not callable(getattr(MrBeamDocUtils, attr)) and not attr.startswith("_")]
+
+    @staticmethod
+    def get_mrbeam_model_enum_for(mrbeam_model):
+        if not mrbeam_model:
+            return None
+
+        mrbeam_model_found = next((model for model in MrBeamModel if model.value.lower() == mrbeam_model.lower()), None)
+        return mrbeam_model_found
+
+    @staticmethod
+    def get_supported_language_enum_for(language):
+        if not language:
+            return None
+
+        supported_language = next((lang for lang in SupportedLanguage if lang.value.lower() == language.lower()), None)
+        return supported_language
+
+    @staticmethod
+    def get_mrbeamdoc_type_enum_for(doctype):
+        if not doctype:
+            return None
+
+        mrbeamdoc_type = next((doctyp for doctyp in MrBeamDocType if doctyp.value.lower() == doctype.lower()), None)
+        return mrbeamdoc_type
