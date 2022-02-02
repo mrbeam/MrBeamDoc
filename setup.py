@@ -1,9 +1,10 @@
 # coding=utf-8
-from distutils.core import setup
+
+from setuptools import setup, find_packages
 
 import versioneer
 
-exec (open('octoprint_mrbeamdoc/__version.py').read())
+exec(open('octoprint_mrbeamdoc/__version.py').read())
 
 setup(name='MrBeamDoc',
       version=versioneer.get_version(),
