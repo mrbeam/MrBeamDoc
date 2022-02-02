@@ -13,7 +13,7 @@ setup(name='MrBeamDoc',
       author='Mr Beam',
       author_email='dev@mr-beam.org',
       url='https://github.com/mrbeam/MrBeamDoc',
-      packages=find_packages(exclude='test'),
+      packages=find_packages(exclude=('test')),
       package_dir={'octoprint_mrbeamdoc': 'octoprint_mrbeamdoc'},
       package_data={'octoprint_mrbeamdoc': ['docs/*']},
       install_requires=['enum34==1.1.10']
