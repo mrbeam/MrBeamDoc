@@ -1584,6 +1584,8 @@ version_json = '''
 
 def get_versions():
     return json.loads(version_json)
+
+__version__ = get_versions().get("version")
 """
 
 
