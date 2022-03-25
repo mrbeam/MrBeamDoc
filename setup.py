@@ -4,8 +4,6 @@ from setuptools import setup, find_packages
 
 import versioneer
 
-exec(open('octoprint_mrbeamdoc/__version.py').read())
-
 setup(name='MrBeamDoc',
       version=versioneer.get_version(),
       cmdclass=versioneer.get_cmdclass(),
