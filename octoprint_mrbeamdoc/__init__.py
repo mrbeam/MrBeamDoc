@@ -1,22 +1,14 @@
 #!/usr/bin/env python
 # coding=utf-8
+import os
 
-import octoprint.plugin
-
-
-from __version import __version__
+DOC_ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 
-class MrBeamDocPlugin(octoprint.plugin.AssetPlugin):
-    pass
+def get_version():
+    return __version__
 
 
-__plugin_name__ = "MrBeamDoc"
-
-
-def __plugin_load__():
-    global __plugin_implementation__
-    __plugin_implementation__ = MrBeamDocPlugin()
-
-    global __plugin_hooks__
-    __plugin_hooks__ = {}
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
