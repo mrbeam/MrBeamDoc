@@ -28,7 +28,8 @@ class MrBeamDocUtils:
                                                     [SupportedLanguage.GERMAN,
                                                      SupportedLanguage.ENGLISH],
                                                     additionally_valid_models=[MrBeamModel.DREAMCUT,
-                                                                               MrBeamModel.DREAMCUT_S])
+                                                                               MrBeamModel.DREAMCUT_S,
+                                                                               MrBeamModel.DREAMCUT_X])
     USER_MANUAL = MrBeamDocDefinition(MrBeamDocType.USER_MANUAL,
                                       MrBeamModel.MRBEAM2,
                                       [SupportedLanguage.GERMAN,
@@ -48,7 +49,8 @@ class MrBeamDocUtils:
                                                 SupportedLanguage.ITALIAN,
                                                 SupportedLanguage.DUTCH],
                                                additionally_valid_models=[MrBeamModel.DREAMCUT,
-                                                                          MrBeamModel.DREAMCUT_S])
+                                                                          MrBeamModel.DREAMCUT_S,
+                                                                          MrBeamModel.DREAMCUT_X])
     """Cache of definitions created, no need of refresh until update"""
     __DEFINITIONS_AVAILABLE = None
 
