@@ -11,3 +11,4 @@ class MrBeamModel(Enum):
     DREAMCUT_ALIAS = 'dreamcut'
     DREAMCUT = 'mrbeam2_dc'
     DREAMCUT_S = "mrbeam2_dc_s"
+    DREAMCUT_X = "mrbeam2_dc_x"
