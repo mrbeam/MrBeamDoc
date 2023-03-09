@@ -8,12 +8,13 @@ from octoprint_mrbeamdoc.enum.supported_languages import SupportedLanguage
 from octoprint_mrbeamdoc.exception.mrbeam_doc_not_found import MrBeamDocNotFoundException
 from octoprint_mrbeamdoc.utils import mrbeam_doc_utils
 from octoprint_mrbeamdoc.utils.mrbeam_doc_utils import MrBeamDocUtils
+import importlib
 
 
 class TestMrBeamDocUtils(TestCase):
     def tearDown(self):
         # Needed since otherwise the cache is not initialised after the test ran with patch mocking
-        reload(mrbeam_doc_utils)
+        importlib.reload(mrbeam_doc_utils)
 
     def test_happy_path_german(self):
         mrbeamdoc = MrBeamDocUtils.get_mrbeamdoc_for(MrBeamDocType.QUICKSTART_GUIDE, MrBeamModel.MRBEAM2,
@@ -121,4 +122,5 @@ class TestMrBeamDocUtils(TestCase):
         MrBeamDocUtils.get_mrbeam_definitions_for(MrBeamModel.MRBEAM2_DC_R2)
         MrBeamDocUtils.get_mrbeam_definitions_for(MrBeamModel.DREAMCUT)
         MrBeamDocUtils.get_mrbeam_definitions_for(MrBeamModel.DREAMCUT_S)
+        MrBeamDocUtils.get_mrbeam_definitions_for(MrBeamModel.DREAMCUT_X)
         self.assertEquals(get_definitions_available_mock.call_count, 1)
